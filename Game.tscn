@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/starfield.webm" type="VideoStream" id=1]
 [ext_resource path="res://Assets/Background.gd" type="Script" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://Assets/level.png" type="Texture" id=4]
 [ext_resource path="res://Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://Assets/BebasNeueRegular.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://Enemy/Enemies.gd" type="Script" id=8]
+[ext_resource path="res://HUD.gd" type="Script" id=7]
+[ext_resource path="res://Enemy/Enemies2.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -41,6 +42,7 @@ autostart = true
 [node name="Level" type="Area2D" parent="."]
 visible = false
 position = Vector2( 363, 505.5 )
+monitoring = false
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -57,6 +59,7 @@ polygon = PoolVector2Array( 29.5, -40.8, 29.5, -39.4, 41.5, -28.4, 41.5, -26.1, 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,5 +85,9 @@ custom_fonts/font = SubResource( 1 )
 text = "Score"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="finished" from="Background" to="Background" method="_on_Background_finished"]
 [connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Level" to="Level" method="_on_Level_body_entered"]
